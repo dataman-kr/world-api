@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: World City API
+  description: Sample API using World DB's City table
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /cities:
+    get:
+      summary: Get all cities
+      tags:
+        - City
+      responses:
+        '200':
+          description: A list of cities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+    post:
+      summary: Create a new city
+      tags:
+        - City
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/City'
+      responses:
+        '200':
+          description: City created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+
+  /cities/{id}:
+    get:
+      summary: Get a city by ID
+      tags:
+        - City
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: City found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+        '404':
+          description: City not found
+    put:
+      summary: Update a city by ID
+      tags:
+        - City
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/City'
+      responses:
+        '200':
+          description: City updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+    delete:
+      summary: Delete a city by ID
+      tags:
+        - City
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: City deleted
+
+components:
+  schemas:
+    City:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4080
+        name:
+          type: string
+          example: Busan
+        countryCode:
+          type: string
+          example: KOR
+        district:
+          type: string
+          example: Gyeongsangnam-do
+        population:
+          type: integer
+          example: 3500000

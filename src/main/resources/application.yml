@@ -1,0 +1,14 @@
+spring.application.name: world-api
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+    resolve-schema-properties: true
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: Country API
+        url: /openapi/world-country-api.yml
+      - name: City API
+        url: /openapi/world-city-api.yml
